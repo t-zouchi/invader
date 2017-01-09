@@ -6,36 +6,35 @@ public class characterController : MonoBehaviour {
 
   Rigidbody m_Rigidbody;
 
-  // Use this for initialization
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
   }
 	
-	// Update is called once per frame
 	void Update () {
+    Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
     float speed = 3f;
-    float x = 0.0f;
-    float y = 0.0f;
-    float z = 0.0f;
-
+    float inputHorizontal = 0.0f; //横
+    float inputVertical = 0.0f;  //前後
 
     if (Input.GetKey(KeyCode.D))
     {
-      x += speed;
+      inputHorizontal = 1f;
     }
-    if (Input.GetKey(KeyCode.A))
+    else if (Input.GetKey(KeyCode.A))
     {
-      x -= speed;
-    }
-    if (Input.GetKey(KeyCode.W))
-    {
-      z += speed;
-    }
-    if (Input.GetKey(KeyCode.S))
-    {
-      z -= speed;
+      inputHorizontal = -1f;
     }
 
-    m_Rigidbody.velocity = z * transform.forward + y * transform.up + x * transform.right;
+    if (Input.GetKey(KeyCode.W))
+    {
+      inputVertical = 1f;
+    }
+    else if (Input.GetKey(KeyCode.S))
+    {
+      inputVertical = -1f;
+    }
+
+    Vector3 moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
+    m_Rigidbody.velocity = moveForward * speed;
   }
 }
