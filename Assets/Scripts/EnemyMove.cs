@@ -24,14 +24,12 @@ public class EnemyMove : MonoBehaviour {
       x = -1;
     }
 
-
     move = new Vector3(x, 0, 0);
     m_Rigidbody.velocity = transform.right * x;
 	}
 
   void OnCollisionEnter(Collision collision)
   {
-    Debug.Log("collison");
     moveflg = moveflg * -1;
   }
 }
