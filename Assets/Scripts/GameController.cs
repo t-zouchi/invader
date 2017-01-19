@@ -53,3 +53,18 @@ public class Level_one
   public int layer = 3;
   public int enemy = 6;
 }
+
+public class enemyMoveController
+{
+  public static int moveflg = 1;
+
+  public int getMoveFlg()
+  {
+    return moveflg;
+  }
+
+  public void setMoveFlg()
+  {
+    moveflg = moveflg * (-1);
+  }
+}

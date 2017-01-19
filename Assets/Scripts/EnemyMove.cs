@@ -8,14 +8,16 @@ public class EnemyMove : MonoBehaviour {
   int moveflg = 1;
   float x = 0;
   Vector3 move;
-
+ 
   // Use this for initialization
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
+    moveflg = enemyMoveController.moveflg;
   }
 	
 	// Update is called once per frame
 	void Update () {
+    moveflg = enemyMoveController.moveflg;
 		if(moveflg == 1)
     {
       x = 1;
@@ -30,6 +32,7 @@ public class EnemyMove : MonoBehaviour {
 
   void OnCollisionEnter(Collision collision)
   {
-    moveflg = moveflg * -1;
+    enemyMoveController.moveflg = moveflg * -1;
+    moveflg = enemyMoveController.moveflg;
   }
 }
