@@ -5,6 +5,9 @@ using UnityEngine;
 public class characterController : MonoBehaviour {
 
   Rigidbody m_Rigidbody;
+  public GameObject bullet;
+  public float bulletSpeed = 3000f;
+  public Transform muzzle;
 
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
@@ -37,9 +40,15 @@ public class characterController : MonoBehaviour {
     if (Input.GetMouseButtonDown(0))
     {
       Debug.Log("ばぁん");
+      shot();
     }
 
     Vector3 moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
     m_Rigidbody.velocity = moveForward * speed;
+  }
+
+  void shot()
+  {
+    GameObject _bullet = GameObject.Instantiate(bullet, muzzle.position, Quaternion.identity);
   }
 }
