@@ -34,6 +34,11 @@ public class characterController : MonoBehaviour {
       inputVertical = -1f;
     }
 
+    if (Input.GetMouseButtonDown(0))
+    {
+      Debug.Log("ばぁん");
+    }
+
     Vector3 moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
     m_Rigidbody.velocity = moveForward * speed;
   }
