@@ -28,5 +28,6 @@ public class characterController : MonoBehaviour {
     GameObject _bullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
     Rigidbody _bullet_rb = _bullet.GetComponent<Rigidbody>();
     _bullet_rb.AddForce ( bulletSpeed *( muzzle.transform.forward).normalized);
+    Destroy(_bullet, 1f);
   }
 }
