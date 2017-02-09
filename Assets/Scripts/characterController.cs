@@ -6,7 +6,7 @@ public class characterController : MonoBehaviour {
 
   Rigidbody m_Rigidbody;
   public GameObject bullet;
-  public float bulletSpeed = 3000f;
+  public float bulletSpeed = 1000f;
   public Transform muzzle;
 
   void Start () {
@@ -49,6 +49,10 @@ public class characterController : MonoBehaviour {
 
   void shot()
   {
-    GameObject _bullet = GameObject.Instantiate(bullet, muzzle.position, Quaternion.identity);
+    
+    GameObject _bullet = Instantiate(bullet, muzzle.position, Quaternion.identity);
+    Rigidbody _bullet_rb = _bullet.GetComponent<Rigidbody>();
+    _bullet_rb.AddForce (transform.forward * bulletSpeed);
+    //_bullet_rb.AddForce (transform.forward * 0);
   }
 }
