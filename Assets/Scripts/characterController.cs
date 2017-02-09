@@ -19,7 +19,7 @@ public class characterController : MonoBehaviour {
     float inputHorizontal = 0.0f; //横
     float inputVertical = 0.0f;  //前後
 
-    if (Input.GetKey(KeyCode.D))
+/*    if (Input.GetKey(KeyCode.D))
     {
       inputHorizontal = 1f;
     }
@@ -35,7 +35,7 @@ public class characterController : MonoBehaviour {
     else if (Input.GetKey(KeyCode.S))
     {
       inputVertical = -1f;
-    }
+    }*/
 
     if (Input.GetMouseButtonDown(0))
     {
@@ -43,16 +43,14 @@ public class characterController : MonoBehaviour {
       shot();
     }
 
-    Vector3 moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
-    m_Rigidbody.velocity = moveForward * speed;
+    //Vector3 moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
+    //m_Rigidbody.velocity = moveForward * speed;
   }
 
   void shot()
   {
-    
-    GameObject _bullet = Instantiate(bullet, muzzle.position, Quaternion.identity);
+    GameObject _bullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
     Rigidbody _bullet_rb = _bullet.GetComponent<Rigidbody>();
-    _bullet_rb.AddForce (transform.forward * bulletSpeed);
-    //_bullet_rb.AddForce (transform.forward * 0);
+    _bullet_rb.AddForce ( bulletSpeed *( muzzle.transform.forward).normalized);
   }
 }
