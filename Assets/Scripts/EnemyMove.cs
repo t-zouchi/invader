@@ -36,6 +36,7 @@ public class EnemyMove : MonoBehaviour {
     m_Rigidbody.velocity = transform.right * x;
 	}
 
+  
   void OnCollisionEnter(Collision collision)
   {
     enemyMoveController.moveflg = moveflg * -1;
