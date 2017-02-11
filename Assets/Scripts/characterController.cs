@@ -6,7 +6,7 @@ public class characterController : MonoBehaviour {
 
   Rigidbody m_Rigidbody;
   public GameObject bullet;
-  public float bulletSpeed = 1000f;
+  public float bulletSpeed = 3000f;
   public Transform muzzle;
 
   void Start () {
@@ -28,6 +28,6 @@ public class characterController : MonoBehaviour {
     GameObject _bullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
     Rigidbody _bullet_rb = _bullet.GetComponent<Rigidbody>();
     _bullet_rb.AddForce ( bulletSpeed *( muzzle.transform.forward).normalized);
-    Destroy(_bullet, 1f);
+    Destroy(_bullet, 3f);
   }
 }
