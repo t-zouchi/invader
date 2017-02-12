@@ -15,6 +15,7 @@ public class EnemyMove : MonoBehaviour {
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
     moveflg = enemyMoveController.moveflg;
+    enemyMoveController.changedTime = Time.time;
   }
 	
 	// Update is called once per frame
@@ -46,9 +47,13 @@ public class EnemyMove : MonoBehaviour {
     }
     if(collision.gameObject.tag == "clearwall")
     {
-      enemyMoveController.moveflg = moveflg * -1;
-      moveflg = enemyMoveController.moveflg;
-      moveForward();
+      if(Time.time != enemyMoveController.changedTime)
+      {
+        enemyMoveController.changedTime = Time.time;
+        enemyMoveController.moveflg = moveflg * -1;
+        moveflg = enemyMoveController.moveflg;
+        moveForward();
+      }
     }
     if(collision.gameObject.tag == "Field")
     {

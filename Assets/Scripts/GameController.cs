@@ -59,7 +59,7 @@ public class Level_one
 public class enemyMoveController
 {
   public static int moveflg = 1;
-
+  public static float changedTime;
   public int getMoveFlg()
   {
     return moveflg;
