@@ -24,18 +24,20 @@ public class GameController : MonoBehaviour {
 	}
 
   //z座標の値、個数、種類
-  void setEnemy(int layerNum, int enemyNum, Dictionary<int, GameObject> enemys)
+  public void setEnemy(int layerNum, int enemyNum, Dictionary<int, GameObject> enemys)
   {
     GameObject _enemy;
-    float z = 12f;
-    float y = (z - 8f) / 2f;
-    float x = -10f;
+    DefineEnemys defineEnemys = new DefineEnemys();
+    defineEnemys.generate();
+    float z = defineEnemys.z;
+    float y = z / 2;
+    float x = defineEnemys.x;
     for (int i = 0; i < layerNum; i++)
     {
-      x = -10f;
-      z = 12f + i * 1.1f;
+      x = defineEnemys.x;
+      z = defineEnemys.z + i * 2f;
       if (i != 0) {
-        y = (z + i * 1.1f - 8f) / 2f;
+        y = y + 2f;
       }
       for(int j = 0; j < enemyNum; j++)
       {
@@ -57,14 +59,41 @@ public class Level_one
 public class enemyMoveController
 {
   public static int moveflg = 1;
-
-  public int getMoveFlg()
+  public static float changedTime;
+  public static float distance = 0;
+  public static int getMoveFlg()
   {
     return moveflg;
   }
 
-  public void setMoveFlg()
+  public static void changeMoveFlg()
   {
     moveflg = moveflg * (-1);
+  }
+
+  public static void timeCounter(float currentTime)
+  {
+    if(currentTime - distance >= 5)
+    {
+      setDistance(currentTime);
+      changeMoveFlg();
+    }
+  }
+
+  public static void setDistance(float currentTime)
+  {
+    distance = currentTime;
+  }
+}
+
+public class DefineEnemys
+{
+  public float x = -10f;
+  public float z = 20f;
+
+  public void generate()
+  {
+    this.x = Random.Range(-90f, 80f);
+    this.z = Random.Range(10f, 30f);
   }
 }
