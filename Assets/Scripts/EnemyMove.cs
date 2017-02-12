@@ -44,12 +44,15 @@ public class EnemyMove : MonoBehaviour {
     {
       Destroy(m_Rigidbody.gameObject);
     }
-
     if(collision.gameObject.tag == "clearwall")
     {
       enemyMoveController.moveflg = moveflg * -1;
       moveflg = enemyMoveController.moveflg;
       moveForward();
+    }
+    if(collision.gameObject.tag == "Field")
+    {
+      Debug.Log("げーむおーばー");
     }
 
   }
