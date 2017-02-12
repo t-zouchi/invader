@@ -26,10 +26,10 @@ public class EnemyMove : MonoBehaviour {
       moveflg = enemyMoveController.moveflg;
 		if(moveflg == 1)
     {
-      x = 1;
+      x = 10;
     }else if(moveflg == -1)
     {
-      x = -1;
+      x = -10;
     }
 
     move = new Vector3(x, 0, 0);
@@ -44,9 +44,14 @@ public class EnemyMove : MonoBehaviour {
     {
       Destroy(m_Rigidbody.gameObject);
     }
-    enemyMoveController.moveflg = moveflg * -1;
-    moveflg = enemyMoveController.moveflg;
-    moveForward();
+
+    if(collision.gameObject.tag == "clearwall")
+    {
+      enemyMoveController.moveflg = moveflg * -1;
+      moveflg = enemyMoveController.moveflg;
+      moveForward();
+    }
+
   }
 
   void moveForward()
