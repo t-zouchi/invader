@@ -15,16 +15,19 @@ public class EnemyMove : MonoBehaviour {
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
     moveflg = enemyMoveController.moveflg;
+    moveflg = enemyMoveController.getMoveFlg();
     enemyMoveController.changedTime = Time.time;
   }
 	
 	// Update is called once per frame
 	void Update () {
-    if (moveflg != enemyMoveController.moveflg){
+    enemyMoveController.timeCounter(Time.time);
+    if (moveflg != enemyMoveController.getMoveFlg()){
       moveForward();
     }
 
-      moveflg = enemyMoveController.moveflg;
+
+      moveflg = enemyMoveController.getMoveFlg();
 		if(moveflg == 1)
     {
       x = 10;
@@ -50,9 +53,10 @@ public class EnemyMove : MonoBehaviour {
       if(Time.time != enemyMoveController.changedTime)
       {
         enemyMoveController.changedTime = Time.time;
-        enemyMoveController.moveflg = moveflg * -1;
+        enemyMoveController.changeMoveFlg();
         moveflg = enemyMoveController.moveflg;
         moveForward();
+        enemyMoveController.setDistance(Time.time);
       }
     }
     if(collision.gameObject.tag == "Field")

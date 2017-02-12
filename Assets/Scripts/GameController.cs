@@ -60,14 +60,29 @@ public class enemyMoveController
 {
   public static int moveflg = 1;
   public static float changedTime;
-  public int getMoveFlg()
+  public static float distance = 0;
+  public static int getMoveFlg()
   {
     return moveflg;
   }
 
-  public void setMoveFlg()
+  public static void changeMoveFlg()
   {
     moveflg = moveflg * (-1);
+  }
+
+  public static void timeCounter(float currentTime)
+  {
+    if(currentTime - distance >= 5)
+    {
+      setDistance(currentTime);
+      changeMoveFlg();
+    }
+  }
+
+  public static void setDistance(float currentTime)
+  {
+    distance = currentTime;
   }
 }
 
