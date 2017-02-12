@@ -38,7 +38,12 @@ public class EnemyMove : MonoBehaviour {
 
   
   void OnCollisionEnter(Collision collision)
-  {
+  { 
+    //Debug.Log(collision.gameObject.tag == "Bullet");
+    if(collision.gameObject.tag == "Bullet")
+    {
+      Destroy(m_Rigidbody.gameObject);
+    }
     enemyMoveController.moveflg = moveflg * -1;
     moveflg = enemyMoveController.moveflg;
     moveForward();
