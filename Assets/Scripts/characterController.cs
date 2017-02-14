@@ -17,10 +17,8 @@ public class characterController : MonoBehaviour {
     Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
     if (Input.GetMouseButtonDown(0))
     {
-      Debug.Log("ばぁん");
       shot();
     }
-
   }
 
   void shot()

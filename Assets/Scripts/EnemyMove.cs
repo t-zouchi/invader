@@ -47,8 +47,6 @@ public class EnemyMove : MonoBehaviour {
     if(collision.gameObject.tag == "Bullet")
     {
       Destroy(m_Rigidbody.gameObject);
-      //他に敵がいるか探して
-      //いなかったら新しく敵を作る
     }
     if(collision.gameObject.tag == "clearwall")
     {
@@ -65,7 +63,6 @@ public class EnemyMove : MonoBehaviour {
     {
       Debug.Log("げーむおーばー");
     }
-
   }
 
   void moveForward()

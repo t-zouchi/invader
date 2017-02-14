@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
     DefineEnemys defineEnemys = new DefineEnemys();
     defineEnemys.generate();
     float z = defineEnemys.z;
-    float y = z / 2;
+    float y = defineEnemys.y + Mathf.Abs(z / 2);
     float x = defineEnemys.x;
     for (int i = 0; i < layerNum; i++)
     {
@@ -55,7 +55,6 @@ public class GameController : MonoBehaviour {
     GameObject[] tagObjects = GameObject.FindGameObjectsWithTag("Enemy");
     if (tagObjects.Length == 0)
     {
-      Debug.Log("みんな死んだよ");
       setEnemy(level_one.layer, level_one.enemy, enemys);
     }
   }
@@ -100,13 +99,13 @@ public class enemyMoveController
 public class DefineEnemys
 {
   public float x = -10f;
+  public float y = 10f;
   public float z = 20f;
 
   public void generate()
   {
     this.x = Random.Range(-90f, 80f);
-    this.z = Random.Range(10f, 30f);
+    this.y = Random.Range(10f, 25f);
+    this.z = Random.Range(-30f, 30f);
   }
-
-  
 }
