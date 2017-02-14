@@ -7,11 +7,11 @@ public class GameController : MonoBehaviour {
   public GameObject enemy1;
   public GameObject enemy2;
   public GameObject enemy3;
+  Dictionary<int, GameObject> enemys = new Dictionary<int, GameObject>();
 
   // Use this for initialization
   void Start () {
     Level_one level_one = new Level_one();
-    Dictionary<int, GameObject> enemys = new Dictionary<int, GameObject>();
     enemys.Add(0, enemy1);
     enemys.Add(1, enemy2);
     enemys.Add(2, enemy3);
@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+    checkEnemy();
 	}
 
   //z座標の値、個数、種類
@@ -48,12 +48,23 @@ public class GameController : MonoBehaviour {
       }
     }
   }
+
+  private void checkEnemy()
+  {
+    Level_one level_one = new Level_one();
+    GameObject[] tagObjects = GameObject.FindGameObjectsWithTag("Enemy");
+    if (tagObjects.Length == 0)
+    {
+      Debug.Log("みんな死んだよ");
+      setEnemy(level_one.layer, level_one.enemy, enemys);
+    }
+  }
 }
 
 public class Level_one
 {
-  public int layer = 3;
-  public int enemy = 6;
+  public int layer = 4;
+  public int enemy = 8;
 }
 
 public class enemyMoveController
@@ -96,4 +107,6 @@ public class DefineEnemys
     this.x = Random.Range(-90f, 80f);
     this.z = Random.Range(10f, 30f);
   }
+
+  
 }
