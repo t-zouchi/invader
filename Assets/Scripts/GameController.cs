@@ -9,13 +9,16 @@ public class GameController : MonoBehaviour {
   public GameObject enemy3;
   Dictionary<int, GameObject> enemys = new Dictionary<int, GameObject>();
 
+  Level level = new Level();
+
+
   // Use this for initialization
   void Start () {
-    Level_one level_one = new Level_one();
+    
     enemys.Add(0, enemy1);
     enemys.Add(1, enemy2);
     enemys.Add(2, enemy3);
-    setEnemy(level_one.layer, level_one.enemy, enemys);
+    setEnemy(level.getLayer(), level.getEnemy(), enemys);
 	}
 	
 	// Update is called once per frame
@@ -49,21 +52,62 @@ public class GameController : MonoBehaviour {
     }
   }
 
-  private void checkEnemy()
+  public void checkEnemy()
   {
-    Level_one level_one = new Level_one();
     GameObject[] tagObjects = GameObject.FindGameObjectsWithTag("Enemy");
     if (tagObjects.Length == 0)
     {
-      setEnemy(level_one.layer, level_one.enemy, enemys);
+      level.levelup();
+      setEnemy(level.getLayer(), level.getEnemy(), enemys);
+
+      if(level.getStage() == 20)
+      {
+        Debug.Log("すごーい");
+      }
     }
   }
 }
 
-public class Level_one
+public class Level
 {
   public int layer = 4;
   public int enemy = 8;
+  public int stage = 1;
+
+  public void levelup()
+  {
+    if (this.stage % 4 == 0)
+    {
+      this.layer++;
+    }
+    if(this.stage % 3 == 0)
+    {
+      this.enemy++;
+      if(this.enemy >= 12 ){
+        this.enemy = 12;
+      }
+    }
+    this.stage++;
+  }
+  public int getLayer()
+  {
+    return this.layer;
+  }
+
+  public int getEnemy()
+  {
+    return this.enemy;
+  }
+
+  public void nextStage()
+  {
+    this.stage++;
+  }
+
+  public int getStage()
+  {
+    return this.stage;
+  }
 }
 
 public class enemyMoveController
@@ -83,7 +127,7 @@ public class enemyMoveController
 
   public static void timeCounter(float currentTime)
   {
-    if(currentTime - distance >= 5)
+    if(currentTime - distance >= 3.5)
     {
       setDistance(currentTime);
       changeMoveFlg();
