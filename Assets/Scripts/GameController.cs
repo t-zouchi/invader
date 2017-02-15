@@ -149,7 +149,7 @@ public class DefineEnemys
   public void generate()
   {
     this.x = Random.Range(-90f, 80f);
-    this.y = Random.Range(10f, 25f);
+    this.y = Random.Range(8f, 18f);
     this.z = Random.Range(-30f, 30f);
   }
 }
