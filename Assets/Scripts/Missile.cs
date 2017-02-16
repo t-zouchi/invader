@@ -21,5 +21,14 @@ public class Missile : MonoBehaviour {
   void OnCollisionEnter(Collision collision)
   {
     Debug.Log(collision.gameObject.tag);
+    if(collision.gameObject.tag =="Field")
+    {
+      Destroy(missile.gameObject);
+    }
+
+    if (collision.gameObject.tag == "Bullet")
+    {
+      Destroy(missile.gameObject);
+    }
   }
 }
