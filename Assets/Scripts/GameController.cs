@@ -7,14 +7,15 @@ public class GameController : MonoBehaviour {
   public GameObject enemy1;
   public GameObject enemy2;
   public GameObject enemy3;
+  public GameObject missile;
   Dictionary<int, GameObject> enemys = new Dictionary<int, GameObject>();
 
   Level level = new Level();
-
+  float attacktime = 0;
 
   // Use this for initialization
   void Start () {
-    
+    attacktime = Time.time;
     enemys.Add(0, enemy1);
     enemys.Add(1, enemy2);
     enemys.Add(2, enemy3);
@@ -24,6 +25,11 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     checkEnemy();
+    if(Time.time - attacktime > 3)
+    {
+      missileGenerator(attacktime);
+      attacktime = Time.time;
+    }
 	}
 
   //z座標の値、個数、種類
@@ -65,6 +71,16 @@ public class GameController : MonoBehaviour {
         Debug.Log("すごーい");
       }
     }
+  }
+
+  public void missileGenerator(float attackTime)
+  {
+    float missile_x = Random.Range(-70, 70);
+    float missile_y = Random.Range(0, 40);
+    float missile_z = Random.Range(-70, 70);
+ 
+    transform.position = new Vector3(missile_x, missile_y, missile_z);
+    Instantiate(missile, transform.position, transform.rotation);  
   }
 }
 
