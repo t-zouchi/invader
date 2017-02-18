@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Missile : MonoBehaviour {
 
@@ -33,12 +34,10 @@ public class Missile : MonoBehaviour {
     {
       Destroy(missile.gameObject);
     }
-    /*
+    
     if (collision.gameObject.tag == "Player")
     {
-      Instantiate(particle, transform.position, transform.rotation);
-      Destroy(particle, 1f);
-      Destroy(missile.gameObject);
-    }*/
+      SceneManager.LoadScene("title");
+    }
   }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMove : MonoBehaviour {
 
@@ -62,6 +63,7 @@ public class EnemyMove : MonoBehaviour {
     if(collision.gameObject.tag == "Field")
     {
       Debug.Log("げーむおーばー");
+      SceneManager.LoadScene("title");
     }
   }
 
