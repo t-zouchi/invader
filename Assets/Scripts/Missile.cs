@@ -6,6 +6,7 @@ public class Missile : MonoBehaviour {
 
   public float speed;
   Rigidbody missile;
+  public GameObject particle;
   // Use this for initialization
   void Start () {
 		missile = GetComponent<Rigidbody>();
@@ -23,6 +24,8 @@ public class Missile : MonoBehaviour {
     Debug.Log(collision.gameObject.tag);
     if(collision.gameObject.tag =="Field")
     {
+      //Instantiate(particle, missile.transform.position, Quaternion.identity);
+      //Destroy(particle, 1f);
       Destroy(missile.gameObject);
     }
 
@@ -30,5 +33,12 @@ public class Missile : MonoBehaviour {
     {
       Destroy(missile.gameObject);
     }
+    /*
+    if (collision.gameObject.tag == "Player")
+    {
+      Instantiate(particle, transform.position, transform.rotation);
+      Destroy(particle, 1f);
+      Destroy(missile.gameObject);
+    }*/
   }
 }
