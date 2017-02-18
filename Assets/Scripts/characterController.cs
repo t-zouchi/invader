@@ -8,19 +8,26 @@ public class characterController : MonoBehaviour {
   public GameObject bullet;
   public float bulletSpeed = 3000f;
   public Transform muzzle;
-
+  public float beforeShoot = 0;
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
   }
 	
 	void Update () {
     Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-    if (Input.GetMouseButtonDown(0))
+    if (Input.GetMouseButton(0))
     {
-      Debug.Log("ばぁん");
-      shot();
+      if(Time.time - beforeShoot  > 0.1)
+      {
+        shot();
+        beforeShoot = Time.time;
+      }
+      if(beforeShoot == 0)
+      {
+        shot();
+        beforeShoot = Time.time;
+      }
     }
-
   }
 
   void shot()

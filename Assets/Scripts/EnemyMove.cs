@@ -63,7 +63,6 @@ public class EnemyMove : MonoBehaviour {
     {
       Debug.Log("げーむおーばー");
     }
-
   }
 
   void moveForward()
