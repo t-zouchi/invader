@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour {
   public void missileGenerator(float attackTime)
   {
     float missile_x = Random.Range(-70, 70);
-    float missile_y = Random.Range(0, 40);
+    float missile_y = Random.Range(20, 40);
     float missile_z = Random.Range(-70, 70);
  
     transform.position = new Vector3(missile_x, missile_y, missile_z);
