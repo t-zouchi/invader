@@ -40,4 +40,8 @@ public class Missile : MonoBehaviour {
       SceneManager.LoadScene("title");
     }
   }
+  void Damage()
+  {
+    Destroy(gameObject);
+  }
 }

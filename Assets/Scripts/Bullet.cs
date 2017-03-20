@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-  public float destroyTime = 2;
+  public float destroyTime = 1;
   public Rigidbody bullet;
 
 	// Use this for initialization
