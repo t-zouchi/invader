@@ -11,15 +11,16 @@ public class EnemyMove : MonoBehaviour {
   float y = 0;
   float z = 0;
   Vector3 move;
-  float attack_distance = 3f;
+  float attack_distance = 8f;
   float beforeAttack;
+  public GameObject enemyMissile;
  
   // Use this for initialization
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
     moveflg = enemyMoveController.moveflg;
     moveflg = enemyMoveController.getMoveFlg();
-    attack_distance = attack_distance + Random.Range(0f, 99f)/100;
+    attack_distance = attack_distance + Random.Range(5, 25f);
     enemyMoveController.changedTime = Time.time;
     beforeAttack = Time.time;
   }
@@ -90,19 +91,33 @@ public class EnemyMove : MonoBehaviour {
   void EnemyAttack()
   {
     GameObject player = GameObject.FindWithTag("Player");
-    Debug.Log("こうげきー");
     if (player.transform.position.z > gameObject.transform.position.z)
     {
-      if(player.transform.position.z - gameObject.transform.position.z >= 3)
+      //Debug.Log("後ろにいる!!");
+      if (player.transform.position.z - gameObject.transform.position.z >= 20)
       {
-        //攻撃準備OK
-      } 
+        //前に攻撃準備OK
+        //Debug.Log("後ろ範囲外");
+        transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 3f);
+      }
     }
     else
     {
-      if(gameObject.transform.position.z - player.transform.position.z >= 3)
+      //前にいる
+      if(gameObject.transform.position.z - player.transform.position.z >= 20)
       {
         //攻撃準備OK
+        //前に攻撃準備OK
+        //Debug.Log("前範囲外");
+        Vector3 enemyPosition = gameObject.transform.position;
+        enemyPosition.z = enemyPosition.z - 3f;
+        Debug.Log("Gameobject x :" + gameObject.transform.position.x + " y : " + gameObject.transform.position.y + "z : " + gameObject.transform.position.z);
+        Debug.Log("missileTransform x :" + enemyPosition.x + " y : " + enemyPosition.y + "z : " + enemyPosition.z);
+        Instantiate(enemyMissile, enemyPosition, transform.rotation);
+      }
+      else
+      {
+        //Debug.Log("前範囲内");
       }
     }
   }
