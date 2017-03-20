@@ -73,4 +73,10 @@ public class EnemyMove : MonoBehaviour {
     y = -1.1f / 2;
     m_Rigidbody.position = (transform.right * m_Rigidbody.position.x) + (transform.up * m_Rigidbody.position.y + new Vector3(0, y, 0)) + (transform.forward * m_Rigidbody.position.z + new Vector3(0, 0, z));
   }
+
+  void Damage()
+  {
+    Destroy(gameObject);
+  }
+
 }
