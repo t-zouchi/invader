@@ -27,12 +27,16 @@ public class Missile : MonoBehaviour {
     {
       //Instantiate(particle, missile.transform.position, Quaternion.identity);
       //Destroy(particle, 1f);
+      GameObject expl = Instantiate(particle, gameObject.transform.position, gameObject.transform.rotation);
       Destroy(missile.gameObject);
+      Destroy(expl, 1f);
     }
 
     if (collision.gameObject.tag == "Bullet")
     {
+      GameObject expl = Instantiate(particle, gameObject.transform.position, gameObject.transform.rotation);
       Destroy(missile.gameObject);
+      Destroy(expl, 1f);
     }
     
     if (collision.gameObject.tag == "Player")
@@ -40,13 +44,17 @@ public class Missile : MonoBehaviour {
       SceneManager.LoadScene("title");
     }
 
-    if(collision.gameObject.tag == "enemy")
+    if(collision.gameObject.tag == "Enemy")
     {
+      GameObject expl = Instantiate(particle, gameObject.transform.position, gameObject.transform.rotation);
       Destroy(missile.gameObject);
+      Destroy(expl, 1f);
     }
   }
   void Damage()
   {
+    GameObject expl = Instantiate(particle, gameObject.transform.position, gameObject.transform.rotation);
     Destroy(gameObject);
+    Destroy(expl, 1f);
   }
 }
