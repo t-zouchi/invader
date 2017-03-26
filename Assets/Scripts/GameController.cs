@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour {
     float missile_z = Random.Range(-70, 70);
  
     transform.position = new Vector3(missile_x, missile_y, missile_z);
-    Instantiate(missile, transform.position, transform.rotation);  
+    //Instantiate(missile, transform.position, transform.rotation);  
   }
 }
 

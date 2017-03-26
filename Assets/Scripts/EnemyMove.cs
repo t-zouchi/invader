@@ -14,6 +14,7 @@ public class EnemyMove : MonoBehaviour {
   float attack_distance = 3f;
   float beforeAttack;
   public GameObject enemyMissile;
+  public GameObject explosionParticle;
  
   // Use this for initialization
   void Start () {
@@ -86,7 +87,9 @@ public class EnemyMove : MonoBehaviour {
 
   void Damage()
   {
+    GameObject expl = Instantiate(explosionParticle, gameObject.transform.position, gameObject.transform.rotation);
     Destroy(gameObject);
+    Destroy(expl, 1f);
   }
 
   void EnemyAttack()
