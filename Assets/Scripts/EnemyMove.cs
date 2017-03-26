@@ -11,13 +11,19 @@ public class EnemyMove : MonoBehaviour {
   float y = 0;
   float z = 0;
   Vector3 move;
+  float attack_distance = 3f;
+  float beforeAttack;
+  public GameObject enemyMissile;
  
   // Use this for initialization
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
     moveflg = enemyMoveController.moveflg;
     moveflg = enemyMoveController.getMoveFlg();
+    //debug
+    attack_distance = attack_distance + Random.Range(5, 25f);
     enemyMoveController.changedTime = Time.time;
+    beforeAttack = Time.time;
   }
 	
 	// Update is called once per frame
@@ -26,7 +32,6 @@ public class EnemyMove : MonoBehaviour {
     if (moveflg != enemyMoveController.getMoveFlg()){
       moveForward();
     }
-
 
       moveflg = enemyMoveController.getMoveFlg();
 		if(moveflg == 1)
@@ -39,7 +44,12 @@ public class EnemyMove : MonoBehaviour {
 
     move = new Vector3(x, 0, 0);
     m_Rigidbody.velocity = transform.right * x;
-	}
+    if(attack_distance < (Time.time - beforeAttack))
+    {
+      EnemyAttack();
+      beforeAttack = Time.time;
+    }
+  }
 
   
   void OnCollisionEnter(Collision collision)
@@ -79,4 +89,34 @@ public class EnemyMove : MonoBehaviour {
     Destroy(gameObject);
   }
 
+  void EnemyAttack()
+  {
+    GameObject player = GameObject.FindWithTag("Player");
+    Vector3 enemyPosition = gameObject.transform.position;
+    if (player.transform.position.z > gameObject.transform.position.z)
+    {
+      if (player.transform.position.z - gameObject.transform.position.z >= 20)
+      {
+        enemyPosition.z = enemyPosition.z + 5f;
+      }
+      else
+      {
+        enemyPosition.y = enemyPosition.y - 3f;
+        //enemyPosition.z = enemyPosition.z + 5f;
+      }
+    }
+    else
+    {
+      if(gameObject.transform.position.z - player.transform.position.z >= 20)
+      {      
+        enemyPosition.z = enemyPosition.z - 5f;
+      }
+      else
+      {
+        enemyPosition.y = enemyPosition.y - 3f;
+        //enemyPosition.z = enemyPosition.z - f;
+      }
+    }
+    Instantiate(enemyMissile, enemyPosition, transform.rotation);
+  }
 }

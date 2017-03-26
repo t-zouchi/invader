@@ -39,6 +39,11 @@ public class Missile : MonoBehaviour {
     {
       SceneManager.LoadScene("title");
     }
+
+    if(collision.gameObject.tag == "enemy")
+    {
+      Destroy(missile.gameObject);
+    }
   }
   void Damage()
   {
