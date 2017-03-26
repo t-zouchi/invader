@@ -11,7 +11,7 @@ public class EnemyMove : MonoBehaviour {
   float y = 0;
   float z = 0;
   Vector3 move;
-  float attack_distance = 8f;
+  float attack_distance = 3f;
   float beforeAttack;
   public GameObject enemyMissile;
  
@@ -20,6 +20,7 @@ public class EnemyMove : MonoBehaviour {
     m_Rigidbody = GetComponent<Rigidbody>();
     moveflg = enemyMoveController.moveflg;
     moveflg = enemyMoveController.getMoveFlg();
+    //debug
     attack_distance = attack_distance + Random.Range(5, 25f);
     enemyMoveController.changedTime = Time.time;
     beforeAttack = Time.time;
@@ -96,14 +97,24 @@ public class EnemyMove : MonoBehaviour {
     {
       if (player.transform.position.z - gameObject.transform.position.z >= 20)
       {
-        enemyPosition.z = enemyPosition.z + 3f;
+        enemyPosition.z = enemyPosition.z + 5f;
+      }
+      else
+      {
+        enemyPosition.y = enemyPosition.y - 3f;
+        //enemyPosition.z = enemyPosition.z + 5f;
       }
     }
     else
     {
       if(gameObject.transform.position.z - player.transform.position.z >= 20)
       {      
-        enemyPosition.z = enemyPosition.z - 3f;
+        enemyPosition.z = enemyPosition.z - 5f;
+      }
+      else
+      {
+        enemyPosition.y = enemyPosition.y - 3f;
+        //enemyPosition.z = enemyPosition.z - f;
       }
     }
     Instantiate(enemyMissile, enemyPosition, transform.rotation);

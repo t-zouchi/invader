@@ -90,6 +90,12 @@ public class Level
   public int enemy = 8;
   public int stage = 1;
 
+  //using debug
+  //public int layer = 2;
+  //public int enemy = 1;
+  //public int stage = 1;
+
+
   public void levelup()
   {
     if (this.stage % 4 == 0)
