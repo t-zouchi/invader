@@ -110,6 +110,7 @@ public class Level
       }
     }
     this.stage++;
+    GameObject.FindGameObjectWithTag("Player").transform.SendMessageUpwards("addBullt");
   }
   public int getLayer()
   {

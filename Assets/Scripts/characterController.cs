@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class characterController : MonoBehaviour {
 
@@ -11,25 +12,66 @@ public class characterController : MonoBehaviour {
   public float beforeShoot = 0;
   public float range = 100;
   RaycastHit raycastHit;
+  int bulletLimit = 30;
+  int currentBullet = 30;
+  int allBullet = 60;
+  public Canvas canvas;
+  Text bulletText;
 
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
+    foreach (Transform child in canvas.transform)
+    {
+      if (child.name == "Bullet")
+      {
+        bulletText = child.gameObject.GetComponent<Text>();
+        bulletText.transform.SetParent(canvas.transform, false);
+        bulletText.text = bulletLimit + " / " + allBullet;
+      } 
+    }
   }
-	
-	void Update () {
+
+  void Update() {
     Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
     DebugDrawRay();
+
     if (Input.GetMouseButtonDown(0))
     {
-      if(Time.time - beforeShoot  > 0.1)
+      if (currentBullet > 0)
       {
-        RayShot();
-        beforeShoot = Time.time;
+        if (Time.time - beforeShoot > 0.3)
+        {
+          RayShot();
+          beforeShoot = Time.time;
+        }
+        if (beforeShoot == 0)
+        {
+          RayShot();
+          beforeShoot = Time.time;
+        }
+        currentBullet--;
+        bulletText.text = currentBullet + " / " + allBullet;
       }
-      if(beforeShoot == 0)
+    }
+
+    if (Input.GetKeyDown(KeyCode.R)){
+      if (currentBullet == bulletLimit)
+        return;
+
+      if(currentBullet < bulletLimit)
       {
-        RayShot();
-        beforeShoot = Time.time;
+        if(allBullet > bulletLimit)
+        {
+          int tmp = currentBullet;
+          currentBullet = bulletLimit;
+          allBullet = allBullet - (bulletLimit - tmp);
+        }
+        else
+        {
+          currentBullet = allBullet;
+          allBullet = 0;
+        }
+        bulletText.text = currentBullet + " / " + allBullet;
       }
     }
   }
@@ -68,5 +110,10 @@ public class characterController : MonoBehaviour {
         raycastHit.transform.SendMessage("Damage");
       }
     }
+  }
+  void addBullt()
+  {
+    allBullet += 60;
+    bulletText.text = currentBullet + " / " + allBullet;
   }
 }
