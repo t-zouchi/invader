@@ -57,7 +57,8 @@ public class characterController : MonoBehaviour {
     if (Input.GetKeyDown(KeyCode.R)){
       if (currentBullet == bulletLimit)
         return;
-
+      if (allBullet == 0)
+        return;
       if(currentBullet < bulletLimit)
       {
         if(allBullet > bulletLimit)
