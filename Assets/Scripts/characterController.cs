@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class characterController : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class characterController : MonoBehaviour {
   int allBullet = 60;
   public Canvas canvas;
   Text bulletText;
+  float suicideLimit = 3000;
+  float suicidetime = 0;
 
   void Start () {
     m_Rigidbody = GetComponent<Rigidbody>();
@@ -31,7 +34,8 @@ public class characterController : MonoBehaviour {
     }
   }
 
-  void Update() {
+  void Update()
+  {
     Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
     DebugDrawRay();
 
@@ -54,14 +58,15 @@ public class characterController : MonoBehaviour {
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.R)){
+    if (Input.GetKeyDown(KeyCode.R))
+    {
       if (currentBullet == bulletLimit)
         return;
       if (allBullet == 0)
         return;
-      if(currentBullet < bulletLimit)
+      if (currentBullet < bulletLimit)
       {
-        if(allBullet > bulletLimit)
+        if (allBullet > bulletLimit)
         {
           int tmp = currentBullet;
           currentBullet = bulletLimit;
@@ -74,6 +79,10 @@ public class characterController : MonoBehaviour {
         }
         bulletText.text = currentBullet + " / " + allBullet;
       }
+    }
+    if (Input.GetKeyDown(KeyCode.P))
+    {
+      SceneManager.LoadScene("title");
     }
   }
 
